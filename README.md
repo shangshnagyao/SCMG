@@ -21,8 +21,9 @@ ln $GUROBI_HOME/linux64/lib/gurobi.jar lib/
 in this directory to use the Gurobi library in this project.
 
 ## Quick Start
+Make sure Gurobi is successfully installed.
 ### Multiplier Graph generation
-Navigate to the Gurobi directory and execute graph_gen.py. Before execution, adjust the parameters size (specifying the multiplier's bit width) and step (defining the number of logic levels in the compression tree process). 
+Navigate to the ./gurobi directory and execute graph_gen.py. Before execution, adjust the parameters size (specifying the multiplier's bit width) and step (defining the number of logic levels in the compression tree process). 
 ```Bash
 python graph_gen.py --size 8 --step 4
 ``` 
