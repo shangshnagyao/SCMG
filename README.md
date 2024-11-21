@@ -1,3 +1,5 @@
+Pillars: A Consistent CGRA Design Framework
+=====================
 SCMG is a tool leveraging Integer Linear Programming (ILP) to generate high-performance Field-Programmable Gate Array (FPGA)-based multipliers capable of producing both precise and approximate designs. 
 
 The ILP problem is solved using Gurobi; therefore, prior to use, verify that Gurobi is correctly installed and its license is activated. 
