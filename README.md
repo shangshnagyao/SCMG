@@ -34,7 +34,7 @@ python3 mult_gen.py
 ``` 
   
 ### Approximate Multiplier generation
-For approximate multipliers, modify the EXPECT_LUT_NUM parameter within mult_gen4approx.py before execution. 
+For approximate multipliers, modify the target utilization within mult_gen4approx.py before execution. 
 ```Bash
 python3 mult_gen4approx.py --target 45
 ``` 
