@@ -20,9 +20,16 @@ ln $GUROBI_HOME/linux64/lib/gurobi.jar lib/
 ``` 
 in this directory to use the Gurobi library in this project.
 
-The usage is simple: 
-1) Navigate to the Gurobi directory and execute graph_gen.py. Before execution, adjust the parameters size (specifying the multiplier's bit width) and step (defining the number of logic levels in the compression process). 
-2) To generate a precise multiplier, simply run mult_gen.py. For approximate multipliers, modify the EXPECT_LUT_NUM parameter within mult_gen4approx.py before execution. 
-3) The generated multiplier examples are located in the src/rtl directory, while the corresponding testbench files, used for verifying the correctness of the generated multipliers, reside in the src/tb directory.
+## Quick Start
+### Multiplier Graph generation
+Navigate to the Gurobi directory and execute graph_gen.py. Before execution, adjust the parameters size (specifying the multiplier's bit width) and step (defining the number of logic levels in the compression tree process). 
+
+### Accurate Multiplier generation
+To generate an accurate multiplier, simply run mult_gen.py.
+  
+### Approximate Multiplier generation
+For approximate multipliers, modify the EXPECT_LUT_NUM parameter within mult_gen4approx.py before execution. 
+
+The generated multiplier examples are located in the src/rtl directory, while the corresponding testbench files, used for verifying the correctness of the generated multipliers, reside in the src/tb directory.
 
 
