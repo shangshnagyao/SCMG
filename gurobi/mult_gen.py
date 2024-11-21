@@ -1,5 +1,16 @@
 '''
-2024-08-26 增加单数乘法
+Author:       yss
+Affiliation:  JiaLiDun University  
+
+2024-08-08 Create file
+2024-08-12 Determine the value of LUT_INIT_VAL
+2024-08-17 complete the initial version of the code
+2024-08-19 Still has some bugs in CLA part
+2024-08-21 Fix the existing bugs
+2024-08-26 Add odd-number multiplication
+2024-08-30 fix the bug in Compressor 9 INIT parameter
+2024-09-04 Regression validation
+2024-09-11 No Bugs
 '''
 from datetime import datetime
 import csv
@@ -198,19 +209,19 @@ with open('temp.txt', 'w') as file:
                                     file.write(f"p_s{s}_o{o}_{g_cur_cnt}\n")
                                     g_cur_cnt += 1
 
-# 将文件内容写入一个数组
+
 lines = []
 c_cur_cnt0_ary = []
 
-# 打开文件，读取内容
+
 with open('temp.txt', 'r') as file:
     for line in file:
         lines.append(line.strip())
 
 d = 1
-# 打开文件，模式为写入模式（'w'）
+
 with open(f'mult_{size}b_{step}s.v', 'w') as file:
-    # 写入内容到文件
+    
     file.write(f'module mult_{size}b_{step}s ( \n')
     file.write(f'input [{size}-1:0] a,\n')
     file.write(f'input [{size}-1:0] b,\n')

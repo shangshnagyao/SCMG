@@ -3,23 +3,28 @@
 
 import gurobipy as gp
 import csv
+import argparse
+parser = argparse.ArgumentParser(description='Type the desired multiplier size and compression steps')
+parser.add_argument("--size", type=int, default=8)
+parser.add_argument("--step", type=int, default=4)
+args = parser.parse_args()
 
 model = gp.Model("model")
-model.setParam('MIPGap', 0.01)             # 设置相对间隙为1%
-model.setParam('MIPFocus', 1)              # 优先发现可行解
-model.setParam('Threads', 4)               # 使用4个线程并行求解
-model.setParam('TimeLimit', 7200)           # 设定求解时间上限为7200秒
+model.setParam('MIPGap', 0.01)             
+model.setParam('MIPFocus', 1)              
+model.setParam('Threads', 4)               
+model.setParam('TimeLimit', 7200)           
 
-step = 5
-size = 16
+step = args.step
+size = args.size
                     #0  1  2  3  4  5  6  7  8  9  10 11
 cost = gp.tuplelist([1, 1, 1, 2, 1, 1, 1, 3, 3, 2, 2, 2])
-m =    gp.tuplelist([0, 1, 2, 3, 2, 1, 0, 0, 0, 0, 0, 0])   #m[] 是第j阶压缩器消耗的j阶input部分和的数量
-p =    gp.tuplelist([3, 2, 1, 0, 0, 1, 2, 6, 5, 5, 4, 3])   #p[] 是第j阶压缩器消耗的j阶inter部分和的数量
-q =    gp.tuplelist([0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2])   #q[] 是第j阶压缩器消耗的j+1阶inter部分和的数量
-u =    gp.tuplelist([1] * 12)                         #u[] 是第j阶压缩器生成的j阶inter部分和的数量
-v =    gp.tuplelist([1] * 12)                         #v[] 是第j阶压缩器生成的j+1阶inter部分和的数量
-z =    gp.tuplelist([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1])   #z[] 是第j阶压缩器生成的j+2阶inter部分和的数量
+m =    gp.tuplelist([0, 1, 2, 3, 2, 1, 0, 0, 0, 0, 0, 0])  
+p =    gp.tuplelist([3, 2, 1, 0, 0, 1, 2, 6, 5, 5, 4, 3])   
+q =    gp.tuplelist([0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2])   
+u =    gp.tuplelist([1] * 12)                         
+v =    gp.tuplelist([1] * 12)                         
+z =    gp.tuplelist([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1])   
 
 Input = model.addVars(step + 1, 2 * size - 4, vtype=gp.GRB.INTEGER, name="input_pin")
 Inter = model.addVars(step + 1, 2 * size - 4, vtype=gp.GRB.INTEGER, name="inter_pin")
@@ -84,32 +89,32 @@ for i in range(step + 1):
 model.update()
 model.optimize()
 
-# 打印目标值
+
 # print(f'Target value: {round(model.objVal)}\n')
 
 with open('parameter.csv', mode='w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow([step, size, round(model.objVal)])
 
-# 打印在 i == step 时的 Input 和 Inter 变量值
+
 # print(f'\nValues of Input and Inter at i == step (i = {step}):')
 for j in range(2 * size - 4):
     input_value = Input[step, j].x
     inter_value = Inter[step, j].x
 #    print(f'Input[{step},{j}] = {input_value}, Inter[{step},{j}] = {inter_value}')
 
-# 创建并写入CSV文件
+
 with open('input_inter_values_at_step.csv', mode='w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["Index", "Input Value", "Inter Value"])
 
-    # 保存在 i == step 时的 Input 和 Inter 变量值
+    
     for j in range(2 * size - 4):
         input_value = Input[step, j].x
         inter_value = Inter[step, j].x
         writer.writerow([j, input_value, inter_value])
 
-# 提取并打印压缩器变量值
+
 compressor_values = []
 for v in model.getVars():
     if v.varName.startswith("compressor") and v.x > 0.1:
@@ -119,10 +124,10 @@ for v in model.getVars():
         value = round(v.x)
         compressor_values.append((compressor_index, int(var_parts[1]), int(var_parts[2]), value, cost[compressor_index]))
 
-# 按第二维度（i）对压缩器值进行排序
+
 compressor_values.sort(key=lambda x: x[1])
 
-# 将压缩器值保存到CSV文件中
+
 with open('compressor_values.csv', mode='w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["Dimension 1", "Dimension 2", "Dimension 3", "Value", "Cost"])

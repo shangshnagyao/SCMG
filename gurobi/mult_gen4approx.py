@@ -1,10 +1,14 @@
 import pandas as pd
 import csv
 import sys
+import argparse
 from datetime import datetime
+parser = argparse.ArgumentParser(description='Target LUT Utilization')
+parser.add_argument("--target", type=int, default=45)
+args = parser.parse_args()
 
 # Provided constants and functions
-EXPECT_LUT_NUM = 41
+EXPECT_LUT_NUM = args.target
 
 def read_csv_to_array(file_path, start_row=0):
     array = []
@@ -1355,4 +1359,4 @@ with open('approx_mult.v', 'w') as file:
     file.write(f'//v{datetime.now()}\n')
     file.write('endmodule\n')
 
-    #print(len(lines))
+    print(len(lines))
