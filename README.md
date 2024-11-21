@@ -23,12 +23,21 @@ in this directory to use the Gurobi library in this project.
 ## Quick Start
 ### Multiplier Graph generation
 Navigate to the Gurobi directory and execute graph_gen.py. Before execution, adjust the parameters size (specifying the multiplier's bit width) and step (defining the number of logic levels in the compression tree process). 
+```Bash
+python3 graph_gen.py --size 8 --step 4
+``` 
 
 ### Accurate Multiplier generation
 To generate an accurate multiplier, simply run mult_gen.py.
+```Bash
+python3 mult_gen.py
+``` 
   
 ### Approximate Multiplier generation
 For approximate multipliers, modify the EXPECT_LUT_NUM parameter within mult_gen4approx.py before execution. 
+```Bash
+python3 mult_gen4approx.py --target 45
+``` 
 
 The generated multiplier examples are located in the src/rtl directory, while the corresponding testbench files, used for verifying the correctness of the generated multipliers, reside in the src/tb directory.
 
