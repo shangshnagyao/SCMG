@@ -10,7 +10,7 @@ Affiliation:  xxx University
 2024-08-26 Add odd-number multiplication
 2024-08-30 fix the bug in Compressor 9 INIT parameter
 2024-09-04 Regression validation
-2024-09-11 No Bugs
+2024-09-11 Generation for synthesis
 '''
 from datetime import datetime
 import csv
