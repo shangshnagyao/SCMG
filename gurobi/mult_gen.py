@@ -1,6 +1,6 @@
 '''
-Author:       yss
-Affiliation:  JiaLiDun University  
+Author:       xxx
+Affiliation:  xxx University  
 
 2024-08-08 Create file
 2024-08-12 Determine the value of LUT_INIT_VAL
