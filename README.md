@@ -27,6 +27,7 @@ Navigate to the ./gurobi directory and execute graph_gen.py. Before execution, a
 ```Bash
 python graph_gen.py --size 8 --step 4
 ``` 
+This step generates intermediate files for subsequent RTL generation.
 
 ### Accurate Multiplier RTL generation
 To generate an accurate multiplier, simply run mult_gen.py.
