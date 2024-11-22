@@ -28,13 +28,13 @@ Navigate to the ./gurobi directory and execute graph_gen.py. Before execution, a
 python graph_gen.py --size 8 --step 4
 ``` 
 
-### Accurate Multiplier generation
+### Accurate Multiplier RTL generation
 To generate an accurate multiplier, simply run mult_gen.py.
 ```Bash
 python mult_gen.py
 ``` 
   
-### Approximate Multiplier generation
+### Approximate Multiplier RTL generation
 For approximate multipliers, modify the LUT target utilization within mult_gen4approx.py before execution. 
 ```Bash
 python mult_gen4approx.py --target 45
