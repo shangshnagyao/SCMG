@@ -1,1 +1,3 @@
-.
+LUT and CARRY8 RTL model.
+
+Used when the simulator is not VIVADO; not needed when using VIVADO for simulation.
